@@ -6,9 +6,12 @@ import shortid from 'shortid';
 function FeedbackOptions({ options, onLeaveFeedback }) {
   return (
    options.map((option) => (
-     <button type='button' className={styles.button} key={shortid.generate()} onClick={() => onLeaveFeedback(option)}>
+    <button type='button'
+       className={styles.button}
+       key={shortid.generate()}
+       onClick={() => onLeaveFeedback(option)}>
             {option.slice(0, 1).toUpperCase() + option.slice(1)}
-                </button>)))
+    </button>)))
 }
 
 FeedbackOptions.defaultProps = {
@@ -16,7 +19,7 @@ FeedbackOptions.defaultProps = {
 };
 
 FeedbackOptions.propTypes = {
-  options: PropTypes.array,
+  options: PropTypes.array
 };
 
 export default FeedbackOptions;

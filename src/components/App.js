@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Section from './Section/Section';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
-import FeedbackStat from './FeedbackStat/FeedbackStat';
+import Statistics from './Statistics/Statistics';
 import Notification from './Notification/Notification';
 import '../App.css';
 
@@ -31,19 +31,26 @@ export default class App extends Component {
     const options = ['good', 'neutral', 'bad'];
     const total = this.countTotalFeedback();
     const positiveFeedback = this.countPositiveFeedbackPercentage();
+    
     return (
       <>
         <Section title="Pleas leave feedback">
-          <FeedbackOptions options={options} onLeaveFeedback={this.onLeaveFeedback}></FeedbackOptions>
+          <FeedbackOptions
+            options={options}
+            onLeaveFeedback={this.onLeaveFeedback}/>
         </Section>
         {total > 0 && (<Section title="Statistics">
-          <FeedbackStat options={options} state={this.state} total={total} positiveFeedback={positiveFeedback} />
+          <Statistics
+            options={options}
+            state={this.state}
+            total={total}
+            positiveFeedback={positiveFeedback}/>
         </Section>)}
-        {total === 0 && (<Notification message="No feedback given"></Notification>)}
+        {total === 0 && (<Notification message="No feedback given"/>)}
       </>
     )
   }
 }
-/**
- * <Notification message="No feedback given">
- */
+/** 
+ * <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={total} positivePercentage={positiveFeedback}></Statistics>
+*/
