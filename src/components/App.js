@@ -1,49 +1,49 @@
 import React, { Component } from 'react';
-import Layout from './Layout/Layout';
+import Section from './Section/Section';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import FeedbackStat from './FeedbackStat/FeedbackStat';
-//import shortid from 'shortid';
+import Notification from './Notification/Notification';
 import '../App.css';
-
 
 export default class App extends Component {
   state = {
-  good: 0,
-  neutral: 0,
-  bad: 0
+    good: 0,
+    neutral: 0,
+    bad: 0
   }
 
-  onLeaveFeedback = ( option ) => {
+  onLeaveFeedback = (option) => {
     this.setState(
-      { [option] : this.state[option] + 1}
+      { [option]: this.state[option] + 1 }
     );
   }
-
-  countTotalFeedback = (options) => {
-    let sum = 0;
-  for (let option of options) {
-    sum += this.state[option];
-  }
-  console.log(sum)
-  return sum; 
-   }
-
-  countPositiveFeedbackPercentage = (options) => {
-    
-  } 
   
+  countTotalFeedback = () => { 
+    return Object.values(this.state).reduce((acc,value)=> acc+ value,0)
+  }
+
+  countPositiveFeedbackPercentage = () => {
+    const percent = Math.round((100 * this.state.good) / this.countTotalFeedback());
+    return percent>0 ? percent : 0;
+  }
+
   render() {
     const options = ['good', 'neutral', 'bad'];
-    
+    const total = this.countTotalFeedback();
+    const positiveFeedback = this.countPositiveFeedbackPercentage();
     return (
       <>
-        <Layout title="Pleas leave feedback">
+        <Section title="Pleas leave feedback">
           <FeedbackOptions options={options} onLeaveFeedback={this.onLeaveFeedback}></FeedbackOptions>
-        </Layout>
-        <Layout title="Statistics">
-          <FeedbackStat options={options} state={this.state}/>
-        </Layout>
+        </Section>
+        {total > 0 && (<Section title="Statistics">
+          <FeedbackStat options={options} state={this.state} total={total} positiveFeedback={positiveFeedback} />
+        </Section>)}
+        {total === 0 && (<Notification message="No feedback given"></Notification>)}
       </>
     )
   }
 }
+/**
+ * <Notification message="No feedback given">
+ */

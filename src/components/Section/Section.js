@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Layout.module.css';
+import styles from './Section.module.css';
 
-function Layout({ children, title }) {
+function Section({ children, title }) {
     return (
         <>
             <div className={styles.layout} >
@@ -13,14 +13,14 @@ function Layout({ children, title }) {
         </>);
 }
 
-Layout.defaultProps = {
+Section.defaultProps = {
   title: '',
   children: '',
 };
 
-Layout.propTypes = {
+Section.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,
 };
 
-export default Layout;
+export default Section;
