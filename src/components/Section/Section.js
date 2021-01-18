@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './Section.module.css';
 
 function Section({ children, title }) {
-    return (
-        <>
-            <div className={styles.layout} >
-                <h1> </h1>
-                {title && <h2>{title}</h2>}
-                {children}
-            </div>
-        </>);
+  return (
+    <div className={styles.layout} >
+      {title && <h2>{title}</h2>}
+      {children}
+    </div>
+  );
 }
 
 Section.defaultProps = {
