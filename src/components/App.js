@@ -28,7 +28,6 @@ export default class App extends Component {
   }
 
   render() {
-    //const options = ['good', 'neutral', 'bad'];
     const total = this.countTotalFeedback();
     const positiveFeedback = this.countPositiveFeedbackPercentage();
     
@@ -51,6 +50,3 @@ export default class App extends Component {
     )
   }
 }
-/** 
- * <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={total} positivePercentage={positiveFeedback}></Statistics>
-*/
